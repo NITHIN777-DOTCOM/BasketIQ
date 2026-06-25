@@ -238,11 +238,27 @@ PAGES = [
 page = st.sidebar.radio("Navigate", PAGES, label_visibility="collapsed")
 
 st.sidebar.markdown("---")
-st.sidebar.markdown("### ⚙️ Pipeline Settings")
-n_clusters_ui = st.sidebar.slider("K-Means Clusters", 2, 10, 4, 1)
-contamination_ui = st.sidebar.slider("Anomaly Contamination %", 1, 20, 5, 1)
-min_support_ui = st.sidebar.slider("Apriori Min Support %", 1, 10, 2, 1) / 100
-min_conf_ui = st.sidebar.slider("Apriori Min Confidence %", 10, 80, 25, 5) / 100
+with st.sidebar.expander("⚙️ Pipeline Settings", expanded=False):
+    n_clusters_ui = st.slider(
+        "K-Means Clusters",
+        2, 10, 4, 1,
+        help="Number of customer groups to discover. 4 is a good default. Increase for more granular segments, decrease for broader ones.",
+    )
+    contamination_ui = st.slider(
+        "Anomaly Contamination %",
+        1, 20, 5, 1,
+        help="Expected % of suspicious transactions. 5% means the system flags the top 5% most unusual invoices. Increase if you want more flags, decrease for stricter detection.",
+    )
+    min_support_ui = st.slider(
+        "Apriori Min Support %",
+        1, 10, 2, 1,
+        help="How often two products must appear together to count as a pattern. Lower = more rules found but weaker patterns. Higher = fewer but stronger patterns.",
+    ) / 100
+    min_conf_ui = st.slider(
+        "Apriori Min Confidence %",
+        10, 80, 25, 5,
+        help="How reliable a product association must be. 25% means: when product A is bought, product B appears in at least 25% of those baskets.",
+    ) / 100
 
 st.sidebar.markdown("---")
 st.sidebar.markdown(
