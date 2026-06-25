@@ -98,6 +98,20 @@ class MonthlyTrend(Base):
     mom_change: Mapped[float | None] = mapped_column(Float)
 
 
+class ProductRFM(Base):
+    __tablename__ = "product_rfm"
+
+    stock_code: Mapped[str] = mapped_column(String(64), primary_key=True)
+    recency: Mapped[int | None] = mapped_column(Integer)
+    frequency: Mapped[int | None] = mapped_column(Integer)
+    monetary: Mapped[float | None] = mapped_column(Float)
+    r_score: Mapped[int | None] = mapped_column(Integer)
+    f_score: Mapped[int | None] = mapped_column(Integer)
+    m_score: Mapped[int | None] = mapped_column(Integer)
+    rfm_score: Mapped[int | None] = mapped_column(Integer)
+    segment: Mapped[str | None] = mapped_column(String(64))
+
+
 ANOMALY_COL_MAP = {
     "InvoiceNo": "invoice_no",
     "InvoiceTotal": "invoice_total",
