@@ -37,7 +37,61 @@ into one unified analytics platform.
 
 # 🏗 Architecture
 
-> Replace this image with your architecture diagram.
+                          BasketIQ Architecture
+
+
+                    +--------------------------------+
+                    |      Transaction Dataset       |
+                    |   CSV / PostgreSQL / Faker     |
+                    +---------------+----------------+
+                                    |
+                                    |
+                                    ▼
+                    +--------------------------------+
+                    |  Data Validation & Cleaning    |
+                    | Missing Values • Duplicates    |
+                    | Outliers • Feature Encoding    |
+                    +---------------+----------------+
+                                    |
+                                    |
+                                    ▼
+                    +--------------------------------+
+                    |      Feature Engineering       |
+                    | RFM • Revenue • Temporal       |
+                    | Customer & Product Features    |
+                    +---------------+----------------+
+                                    |
+         ┌──────────────────────────┼──────────────────────────┐
+         │                          │                          │
+         ▼                          ▼                          ▼
++--------------------+   +--------------------+   +----------------------+
+| Isolation Forest   |   | K-Means Clustering |   | Apriori Association  |
+| Anomaly Detection  |   | Customer Segments  |   | Market Basket Rules  |
++--------------------+   +--------------------+   +----------------------+
+         │                          │                          │
+         └───────────────┬──────────┴──────────┬───────────────┘
+                         │                     │
+                         ▼                     ▼
+              +-------------------------------------------+
+              |        PostgreSQL (Neon Database)         |
+              | Persistent Analytics & ML Results Storage |
+              +-------------------+-----------------------+
+                                  |
+                  ┌───────────────┴────────────────┐
+                  │                                │
+                  ▼                                ▼
+      +-------------------------+      +-------------------------+
+      |     FastAPI Backend     |      |   Streamlit Dashboard   |
+      | REST APIs + Swagger UI  |      | Interactive Analytics   |
+      +-----------+-------------+      +-----------+-------------+
+                  │                                │
+                  └───────────────┬────────────────┘
+                                  │
+                                  ▼
+                    +-------------------------------+
+                    |     Business Intelligence      |
+                    | PDF Reports • Insights • APIs |
+                    +-------------------------------+
 
 <p align="center">
 <img src="images/architecture.png" width="900">
@@ -53,7 +107,7 @@ into one unified analytics platform.
 
 Live Demo:
 
-https://YOUR_STREAMLIT_LINK.streamlit.app
+https://basketiq-dev.streamlit.app/
 
 ---
 
