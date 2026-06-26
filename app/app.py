@@ -577,7 +577,7 @@ elif "Anomaly" in page:
     styled = (
         anomalies[display_cols]
         .sort_values("AnomalyScore", ascending=False)
-        .style.applymap(_color_risk, subset=["RiskLevel"])
+        .style.map(_color_risk, subset=["RiskLevel"])
         .format({
             "InvoiceTotal": "£{:,.2f}",
             "AnomalyScore": "{:.3f}",
