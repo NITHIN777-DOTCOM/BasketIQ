@@ -104,7 +104,7 @@ def preprocess(df: pd.DataFrame) -> pd.DataFrame:
     logger.info("After dropping missing CustomerID: %d rows", len(df))
 
     # 5. Parse InvoiceDate
-    df["InvoiceDate"] = pd.to_datetime(df["InvoiceDate"], infer_datetime_format=True, errors="coerce")
+    df["InvoiceDate"] = pd.to_datetime(df["InvoiceDate"])
     df = df.dropna(subset=["InvoiceDate"])
 
     # 6. Extract temporal features
